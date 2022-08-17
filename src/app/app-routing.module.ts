@@ -11,13 +11,14 @@ const routes: Route[] = [
   },
   {
     path: 'about',
-    component: AboutComponent,
+    // component: AboutComponent, // - to jest ok ale nie ładuje componentu używając lazy loadingu
+    loadComponent: () => import('./about/about.component').then((mod) => mod.AboutComponent),
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./dashboard/dashboard-routing.module').then(
-        (mod) => mod.DashboardRoutingModule
+      import('./dashboard/routes').then(
+        (mod) => mod.DASHBOARD_ROUTES
       ),
   },
 ];
